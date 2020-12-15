@@ -14,6 +14,11 @@
       "emailUser": "bambang@mail.com",
       "password": "321",
       "id": 3
+    },
+    {
+      "email": "admin@purwadhika.com",
+      "password": "123",
+      "id": 4
     }
   ],
   "categories": [
@@ -74,6 +79,22 @@
       "price": 16000000,
       "stock": 3,
       "id": 6
+    },
+    {
+      "name": "iPad",
+      "categoryID": 3,
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstore.storeimages.cdn-apple.com%2F8756%2Fas-images.apple.com%2Fis%2Frfb-ipad-mini4-gray-wifi-2015%3Fwid%3D1144%26hei%3D1144%26fmt%3Djpeg%26qlt%3D80%26op_usm%3D0.5%2C0.5%26.v%3D1582329213345&f=1&nofb=1",
+      "price": 20000000,
+      "stock": 12,
+      "id": 7
+    },
+    {
+      "name": "iPad Mini",
+      "categoryID": 3,
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.fADvhdLXg5m_-7IhN-HKVAHaHa%26pid%3DApi&f=1",
+      "price": 14000000,
+      "stock": 20,
+      "id": 8
     }
   ],
   "cart": [
@@ -94,6 +115,24 @@
       "productID": 1,
       "qty": 20,
       "id": 2
+    },
+    {
+      "name": "iPad Mini",
+      "qty": 4,
+      "price": 14000000,
+      "userID": 1,
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.fADvhdLXg5m_-7IhN-HKVAHaHa%26pid%3DApi&f=1",
+      "productID": 8,
+      "id": 3
+    },
+    {
+      "name": "iPhone 8",
+      "qty": 4,
+      "price": 10000000,
+      "userID": 4,
+      "image": "https://eraspace.com/pub/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/i/p/iphone-8-gold_4_1_2.jpg",
+      "productID": 1,
+      "id": 4
     }
   ],
   "transaction": [
