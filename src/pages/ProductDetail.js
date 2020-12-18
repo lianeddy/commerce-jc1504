@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import queryString from "querystring";
 import { connect } from "react-redux";
-import { fetchProductByIdAction, addToCartAction } from "../redux/action";
+import {
+  fetchProductByIdAction,
+  addToCartAction,
+  editCartAction,
+} from "../redux/action";
 import { Button } from "reactstrap";
 import Fade from "react-reveal/Fade";
+import { ToastContainer, toast } from "react-toastify";
 
 class ProductDetail extends Component {
   state = {
@@ -17,7 +22,7 @@ class ProductDetail extends Component {
     // console.log(this.props.location.search.split("="));
     // const productID = this.props.location.search.split("=")[1];
     const productID = queryString.parse(this.props.location.search)["?id"];
-    console.log(productID);
+    // console.log(productID);
     fetchProductByIdAction(productID);
   }
 
@@ -34,20 +39,43 @@ class ProductDetail extends Component {
   };
 
   addToCart = () => {
-    const { productById, userID, addToCartAction } = this.props;
-    const { qtySelected } = this.state;
-    const { name, price, image, id } = productById;
-    const dataCart = {
-      name,
-      qty: qtySelected,
-      price,
+    const {
+      productById,
       userID,
-      image,
-      productID: id,
-    };
-    // tidak ada = addtocartaction
-    // ada = editcartaction
-    addToCartAction(dataCart);
+      addToCartAction,
+      cartList,
+      editCartAction,
+    } = this.props;
+    const { qtySelected } = this.state;
+    const { name, price, image, id, stock } = productById;
+    if (userID === 0) {
+      alert("Please login before making a purchase");
+      // tidak ada = addtocartaction
+      // ada = editcartaction
+    } else {
+      const duplicate = cartList.find((val) => val.productID === id);
+      if (!duplicate) {
+        const dataCart = {
+          name,
+          qty: qtySelected,
+          price,
+          userID,
+          image,
+          productID: id,
+        };
+        addToCartAction(dataCart);
+      } else {
+        if (duplicate.qty + qtySelected > stock) {
+          alert("not enough stock");
+        } else {
+          editCartAction({
+            id: duplicate.id,
+            qty: duplicate.qty + qtySelected,
+            userID,
+          });
+        }
+      }
+    }
   };
 
   render() {
@@ -105,14 +133,16 @@ class ProductDetail extends Component {
   }
 }
 
-const mapStatetoProps = ({ products, user }) => {
+const mapStatetoProps = ({ products, user, cart }) => {
   return {
     productById: products.productById,
     userID: user.id,
+    cartList: cart.cart,
   };
 };
 
 export default connect(mapStatetoProps, {
   fetchProductByIdAction,
   addToCartAction,
+  editCartAction,
 })(ProductDetail);

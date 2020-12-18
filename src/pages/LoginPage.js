@@ -25,18 +25,35 @@ class LoginPage extends Component {
 
   clickLogin = () => {
     const { email, password } = this.state.loginInfo;
-    Axios.get(`${api_url}/users?email=${email}&password=${password}`)
-      .then((res) => {
-        if (res.data.length !== 0) {
-          this.props.loginAction(res.data[0]);
-          localStorage.setItem("id", res.data[0].id);
-        } else {
-          alert("User Invalid");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const validate = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const validateEmail = validate.test(email);
+    const passwordLength = password.length >= 6;
+    const passwordNumber = /[0-9]/.test(password);
+
+    if (validateEmail) {
+      if (passwordLength && passwordNumber) {
+        Axios.get(`${api_url}/users?email=${email}&password=${password}`)
+          .then((res) => {
+            if (res.data.length !== 0) {
+              this.props.loginAction(res.data[0]);
+              localStorage.setItem("id", res.data[0].id);
+            } else {
+              Axios.post(`${api_url}/users`, { email, password }).then(
+                (response) => {
+                  this.props.loginAction(res.data);
+                }
+              );
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        alert("Password must contain more than 5 characters and a number");
+      }
+    } else {
+      alert("Email invalid");
+    }
   };
 
   render() {

@@ -1,16 +1,19 @@
 import Axios from "axios";
 import { api_url } from "../../helpers/api_url";
 import swal from "sweetalert";
+import { toast } from "react-toastify";
 
 export const addToCartAction = (data) => {
   return (dispatch) => {
     Axios.post(`${api_url}/cart`, data)
       .then((res) => {
         console.log("data masuk");
-        swal("Success!", "Product added to cart!", "success");
+        // swal("Success!", "Product added to cart!", "success");
+        toast("Added to cart!");
         dispatch({
           type: "ADD_TO_CART",
         });
+        dispatch(getCartByIdAction(data.userID));
       })
       .catch((err) => {
         console.log(err);
@@ -51,11 +54,34 @@ export const deleteCartAction = (id, userID) => {
   };
 };
 
+export const editCartAction = (data) => {
+  return (dispatch) => {
+    Axios.patch(`${api_url}/cart/${data.id}`, {
+      qty: data.qty,
+    })
+      .then((res) => {
+        swal("Success!", "Quantity Edited!", "success");
+        dispatch(getCartByIdAction(data.userID));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
 export const checkOutAction = (data) => {
   return (dispatch) => {
     Axios.post(`${api_url}/transaction`, data)
       .then((res) => {
-        console.log("masuk");
+        data.items.forEach((val) => {
+          Axios.get(`${api_url}/products/${val.productID}`).then(
+            ({ data: { stock } }) => {
+              Axios.patch(`${api_url}/products/${val.productID}`, {
+                stock: stock - val.qty,
+              });
+            }
+          );
+        });
         data.items.forEach((val) => {
           Axios.delete(`${api_url}/cart/${val.id}`).then((res) => {
             console.log("deleted id", val.id);

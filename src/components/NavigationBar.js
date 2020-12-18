@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {
+  Badge,
   Collapse,
   DropdownItem,
   DropdownMenu,
@@ -35,7 +36,10 @@ class NavigationBar extends Component {
             <DropdownItem>Profile</DropdownItem>
           </Link>
           <Link to="/cart">
-            <DropdownItem>Cart</DropdownItem>
+            <DropdownItem>
+              Cart
+              <Badge color="danger">{this.props.cartLength}</Badge>
+            </DropdownItem>
           </Link>
           <Link to="/history-transaction">
             <DropdownItem>History</DropdownItem>
@@ -109,7 +113,7 @@ class NavigationBar extends Component {
               </UncontrolledDropdown>
             </Nav>
             {this.props.email ? (
-              <NavbarText>{this.props.email}</NavbarText>
+              <NavbarText>{this.props.email.split("@")[0]}</NavbarText>
             ) : null}
           </Collapse>
         </Navbar>
@@ -118,9 +122,10 @@ class NavigationBar extends Component {
   }
 }
 
-const mapStatetoProps = ({ user }) => {
+const mapStatetoProps = ({ user, cart }) => {
   return {
     email: user.email,
+    cartLength: cart.cart.length,
   };
 };
 

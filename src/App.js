@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { NavigationBar } from "./components";
 // import { api_url } from "./helpers/api_url";
 import {
@@ -14,7 +15,7 @@ import {
   HistoryPage,
   ManageProduct,
 } from "./pages";
-import { keepLogin, loginAction } from "./redux/action";
+import { keepLogin, getCartByIdAction } from "./redux/action";
 
 class App extends Component {
   state = {};
@@ -30,6 +31,7 @@ class App extends Component {
       //     console.log(err);
       //   });
       this.props.keepLogin(id);
+      this.props.getCartByIdAction(id);
     }
   }
 
@@ -45,9 +47,10 @@ class App extends Component {
         <Route path="/cart" component={CartPage} />
         <Route path="/history-transaction" component={HistoryPage} />
         <Route path="/manage-product" component={ManageProduct} />
+        <ToastContainer />
       </div>
     );
   }
 }
 
-export default connect(null, { keepLogin, loginAction })(App);
+export default connect(null, { keepLogin, getCartByIdAction })(App);

@@ -4,6 +4,7 @@ import {
   checkOutAction,
   deleteCartAction,
   getCartByIdAction,
+  editCartAction,
 } from "../redux/action";
 import { Button, Table } from "reactstrap";
 import { Redirect } from "react-router-dom";
@@ -43,22 +44,50 @@ class CartPage extends Component {
   };
 
   checkOut = () => {
-    const { cartList, userID, checkOutAction } = this.props;
-    const date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
+    const checkOutBool = window.confirm("Confirm CheckOut?");
+    if (checkOutBool) {
+      const { cartList, userID, checkOutAction } = this.props;
+      const date = new Date();
+      let day = date.getDate();
+      let month = date.getMonth() + 1;
+      let year = date.getFullYear();
 
-    const checkOutData = {
-      date: `${day}-${month}-${year}`,
-      total: this.renderGrandTotal(),
-      items: cartList,
-      userID: userID,
-    };
-    checkOutAction(checkOutData);
-    this.setState({
-      redirectHome: true,
+      const checkOutData = {
+        date: `${day}-${month}-${year}`,
+        total: this.renderGrandTotal(),
+        items: cartList,
+        userID: userID,
+        status: "belum di bayar",
+      };
+      checkOutAction(checkOutData);
+      this.setState({
+        redirectHome: true,
+      });
+    }
+  };
+
+  decreaseCartQty = (id, qty) => {
+    const { editCartAction, userID } = this.props;
+    editCartAction({
+      id: id,
+      qty: qty - 1,
+      userID,
     });
+  };
+
+  increaseCartQty = (id, qty, productID) => {
+    const { editCartAction, userID, productList } = this.props;
+    const stockAvailable = productList.find((val) => val.id === productID)
+      .stock;
+    if (qty === stockAvailable) {
+      alert("Stock insufficient");
+    } else {
+      editCartAction({
+        id: id,
+        qty: qty + 1,
+        userID,
+      });
+    }
   };
 
   renderTableBody = () => {
@@ -71,9 +100,21 @@ class CartPage extends Component {
             <img src={val.image} alt={`${val.name}.jpg`} height="150px" />
           </td>
           <td>
-            <Button>-</Button>
+            <Button
+              onClick={() =>
+                this.decreaseCartQty(val.id, val.qty, val.productID)
+              }
+            >
+              -
+            </Button>
             <span className="mx-2">{val.qty}</span>
-            <Button>+</Button>
+            <Button
+              onClick={() =>
+                this.increaseCartQty(val.id, val.qty, val.productID)
+              }
+            >
+              +
+            </Button>
           </td>
           <td>Rp.{(val.qty * val.price).toLocaleString()}</td>
           <td>
@@ -132,10 +173,11 @@ class CartPage extends Component {
   }
 }
 
-const mapStatetoProps = ({ user, cart }) => {
+const mapStatetoProps = ({ user, cart, products }) => {
   return {
     userID: user.id,
     cartList: cart.cart,
+    productList: products.productList,
   };
 };
 
@@ -143,4 +185,5 @@ export default connect(mapStatetoProps, {
   getCartByIdAction,
   deleteCartAction,
   checkOutAction,
+  editCartAction,
 })(CartPage);
