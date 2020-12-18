@@ -4,12 +4,14 @@ import { connect } from "react-redux";
 import { api_url } from "../helpers/api_url";
 import { Button, Table } from "reactstrap";
 import { HistoryModal } from "../components";
+import { cancelCheckOutAction } from "../redux/action";
 
 class HistoryPage extends Component {
   state = {
     data: [],
     modalOpen: false,
     selectedData: null,
+    refetch: false,
   };
 
   componentDidMount() {
@@ -23,6 +25,12 @@ class HistoryPage extends Component {
     if (prevProps.userID !== userID) {
       this.fetchData();
     }
+    if (this.state.refetch) {
+      this.fetchData();
+      this.setState({
+        refetch: false,
+      });
+    }
   }
 
   fetchData = () => {
@@ -32,6 +40,7 @@ class HistoryPage extends Component {
         this.setState({
           data: res.data,
         });
+        console.log(res.data, "data in");
       })
       .catch((err) => {
         console.log(err);
@@ -45,6 +54,14 @@ class HistoryPage extends Component {
     });
   };
 
+  cancelCheckOut = (id) => {
+    this.props.cancelCheckOutAction(id);
+
+    this.setState({
+      refetch: true,
+    });
+  };
+
   renderTable = () => {
     const { data } = this.state;
     return data.map((val, index) => {
@@ -53,9 +70,15 @@ class HistoryPage extends Component {
           <td>{val.id}</td>
           <td>{val.date}</td>
           <td>Rp.{val.total.toLocaleString()}</td>
+          <td>{val.status}</td>
           <td>
             <Button color="info" onClick={() => this.toggle(index)}>
               Show items
+            </Button>
+          </td>
+          <td>
+            <Button color="danger" onClick={() => this.cancelCheckOut(val.id)}>
+              Cancel
             </Button>
           </td>
         </tr>
@@ -73,7 +96,9 @@ class HistoryPage extends Component {
               <th>#</th>
               <th>Date</th>
               <th>Total</th>
+              <th>Status</th>
               <th>Items</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>{this.renderTable()}</tbody>
@@ -94,4 +119,4 @@ const mapStatetoProps = ({ user }) => {
   };
 };
 
-export default connect(mapStatetoProps)(HistoryPage);
+export default connect(mapStatetoProps, { cancelCheckOutAction })(HistoryPage);

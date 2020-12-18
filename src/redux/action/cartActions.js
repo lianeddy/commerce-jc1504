@@ -94,3 +94,29 @@ export const checkOutAction = (data) => {
       });
   };
 };
+
+export const cancelCheckOutAction = (id) => {
+  return (dispatch) => {
+    Axios.get(`${api_url}/transaction/${id}`)
+      .then((res) => {
+        console.log(res.data.items);
+        res.data.items.forEach((val) => {
+          Axios.get(`${api_url}/products/${val.productID}`).then(
+            ({ data: { stock } }) => {
+              Axios.patch(`${api_url}/products/${val.productID}`, {
+                stock: stock + val.qty,
+              });
+            }
+          );
+        });
+      })
+      .then(() => {
+        Axios.delete(`${api_url}/transaction/${id}`).then(() => {
+          swal("Success!", "Trasaction Canceled!", "success");
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};

@@ -69,7 +69,7 @@
       "categoryID": 1,
       "image": "https://eraspace.com/pub/media/catalog/product/d/e/detail_ip61_lc_cc_01.jpg",
       "price": 20000000,
-      "stock": 5,
+      "stock": 9,
       "id": 5
     },
     {
@@ -77,7 +77,7 @@
       "categoryID": 2,
       "image": "https://eraspace.com/pub/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/i/b/ibx_macbook_air_2020_gold_1_1_.jpg",
       "price": 16000000,
-      "stock": 3,
+      "stock": 7,
       "id": 6
     },
     {
@@ -98,163 +98,5 @@
     }
   ],
   "cart": [],
-  "transaction": [
-    {
-      "date": "2020-12-15T08:24:05.243Z",
-      "total": 50000000,
-      "items": [
-        {
-          "name": "iPhone 8",
-          "price": 10000000,
-          "image": "https://eraspace.com/pub/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/i/p/iphone-8-gold_4_1_2.jpg",
-          "userID": 1,
-          "productID": 1,
-          "qty": 5,
-          "id": 1
-        }
-      ],
-      "userID": 1,
-      "id": 1
-    },
-    {
-      "date": "2020-12-15T08:24:51.130Z",
-      "total": 50000000,
-      "items": [
-        {
-          "name": "iPhone 8",
-          "price": 10000000,
-          "image": "https://eraspace.com/pub/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/i/p/iphone-8-gold_4_1_2.jpg",
-          "userID": 1,
-          "productID": 1,
-          "qty": 5,
-          "id": 1
-        }
-      ],
-      "userID": 1,
-      "id": 2
-    },
-    {
-      "date": "2020-12-15T08:25:35.344Z",
-      "total": 50000000,
-      "items": [
-        {
-          "name": "iPhone 8",
-          "price": 10000000,
-          "image": "https://eraspace.com/pub/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/i/p/iphone-8-gold_4_1_2.jpg",
-          "userID": 1,
-          "productID": 1,
-          "qty": 5,
-          "id": 1
-        }
-      ],
-      "userID": 1,
-      "id": 3
-    },
-    {
-      "date": "2020-12-15T08:26:47.163Z",
-      "total": 50200000,
-      "items": [
-        {
-          "name": "iPhone 8",
-          "price": 10000000,
-          "image": "https://eraspace.com/pub/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/i/p/iphone-8-gold_4_1_2.jpg",
-          "userID": 1,
-          "productID": 1,
-          "qty": 5,
-          "id": 1
-        },
-        {
-          "name": "iPhone 12 Casing",
-          "price": 100000,
-          "image": "https://eraspace.com/pub/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/i/a/ia1910581224451.jpg",
-          "userID": 1,
-          "productID": 3,
-          "qty": 2,
-          "id": 2
-        }
-      ],
-      "userID": 1,
-      "id": 4
-    },
-    {
-      "date": "2020-12-15T08:27:33.619Z",
-      "total": 101000000,
-      "items": [
-        {
-          "name": "iPhone 8",
-          "price": 10000000,
-          "image": "https://eraspace.com/pub/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/i/p/iphone-8-gold_4_1_2.jpg",
-          "userID": 1,
-          "productID": 1,
-          "qty": 10,
-          "id": 1
-        },
-        {
-          "name": "iPhone 12 Casing",
-          "price": 100000,
-          "image": "https://eraspace.com/pub/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/i/a/ia1910581224451.jpg",
-          "userID": 1,
-          "productID": 3,
-          "qty": 10,
-          "id": 2
-        }
-      ],
-      "userID": 1,
-      "id": 5
-    },
-    {
-      "date": "18-12-2020",
-      "total": 240000000,
-      "items": [
-        {
-          "name": "iPhone 12 Pro",
-          "qty": 5,
-          "price": 20000000,
-          "userID": 1,
-          "image": "https://eraspace.com/pub/media/catalog/product/d/e/detail_ip61_lc_cc_01.jpg",
-          "productID": 5,
-          "id": 3
-        },
-        {
-          "name": "iPad",
-          "qty": 1,
-          "price": 20000000,
-          "userID": 1,
-          "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstore.storeimages.cdn-apple.com%2F8756%2Fas-images.apple.com%2Fis%2Frfb-ipad-mini4-gray-wifi-2015%3Fwid%3D1144%26hei%3D1144%26fmt%3Djpeg%26qlt%3D80%26op_usm%3D0.5%2C0.5%26.v%3D1582329213345&f=1&nofb=1",
-          "productID": 7,
-          "id": 4
-        },
-        {
-          "name": "Macbook Pro Max",
-          "qty": 10,
-          "price": 12000000,
-          "userID": 1,
-          "image": "https://eraspace.com/pub/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/m/a/macbook-pro-2020-2port-spacegray-1_8_1.jpg",
-          "productID": 4,
-          "id": 5
-        }
-      ],
-      "userID": 1,
-      "status": "belum di bayar",
-      "id": 6
-    },
-    {
-      "date": "18-12-2020",
-      "total": 60000000,
-      "items": [
-        {
-          "name": "Macbook Pro Max",
-          "qty": 5,
-          "price": 12000000,
-          "userID": 1,
-          "image": "https://eraspace.com/pub/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/m/a/macbook-pro-2020-2port-spacegray-1_8_1.jpg",
-          "productID": 4,
-          "id": 1
-        }
-      ],
-      "userID": 1,
-      "status": "belum di bayar",
-      "id": 7
-    }
-  ]
+  "transaction": []
 }
